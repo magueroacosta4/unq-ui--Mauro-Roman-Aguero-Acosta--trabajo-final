@@ -3,6 +3,8 @@ import './App.css';
 import {Route, BrowserRouter as Router, Routes} from "react-router-dom";
 import Home from './pages/Home';
 import { GameProvider } from './hooks/GameContext';
+import Game from './pages/Game';
+
 
 function App() {
   return (
@@ -10,6 +12,7 @@ function App() {
       <Router>  
         <Routes>       
           <Route path={"/"} element={<Home/>}/>
+          <Route path={"/Game"} element={<Game/>}/>
         </Routes>
       </Router>
     </GameProvider>

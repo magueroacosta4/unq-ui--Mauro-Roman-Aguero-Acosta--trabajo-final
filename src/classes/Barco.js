@@ -18,7 +18,6 @@ class Barco {
         this.#vida--;
         if (this.#vida == 0) {
             this.#estado = "hundido";
-            alert("Barco hundido");
         }
     }
 

@@ -1,5 +1,5 @@
 import Casilla from "./Casilla";
-import "../styles/Home.css";
+import "../styles/Game.css";
 
 const Tablero = ({ tablero, onClick, idStart }) => {
     

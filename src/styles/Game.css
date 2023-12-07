@@ -1,0 +1,71 @@
+.fila {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+
+}
+
+.gameContainer {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    height: 100%;
+    margin-bottom: 6.3rem;
+}
+
+.tableroInicio {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+    margin-left: 5rem;
+    width: 40rem;
+    height: 40rem;
+}
+
+.tableroPostEleccion {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+    margin-left: 5rem;
+    width: 20rem;
+    height: 20rem;
+ 
+}
+
+
+.header {
+    display: flex;
+    flex-wrap: wrap;
+    width: 36rem;
+    height: 10%;
+    background-color: #3CD3FC;
+    border: 1px solid black;
+    margin-left: 5rem;
+}
+
+.header-text {
+    width: 100%;
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bold;
+    margin-top: 0.5rem;
+}
+
+.modal {
+    position: absolute;
+    top: 40px;
+    left: 40px;
+    right: 40px;
+    bottom: 40px;
+  }
+
+  .Overlay {
+    position: fixed;
+    width: 50%;
+    height: 50%;
+    top: 20%;
+    left: 25%;
+    background-color: rebeccapurple;
+
+
+  }

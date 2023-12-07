@@ -14,16 +14,32 @@ const GameProvider = ({ children }) => {
     const [tablePj2, setTablePj2] = useState(createTable());
     const [casillaAtacadaPJ1, setCasillaAtacadaPJ1] = useState(null);
     const [casillaAtacadaPJ2, setCasillaAtacadaPJ2] = useState(null);
-    const [barcoComputadora] = useState([]);
+    const [barcoComputadora, setBarcoComputadora] = useState([]);
+    const [barcosPJ1, setBarcosPJ1] = useState([]);
     const [turno, setTurno] = useState(true);
-    const [ataquesDeComputadora] = useState({0: [], 1: [], 2: [], 3: [], 4: [], 5: [], 6: [], 7:[], 8: [], 9: []})
+    const [ataquesDeComputadora, setAtaquesDeComputadora] = useState({0: [], 1: [], 2: [], 3: [], 4: [], 5: [], 6: [], 7:[], 8: [], 9: []})
     const [golpeComputadoraX, setGolpeComputadoraX] = useState(null);
     const [golpeComputadoraY, setGolpeComputadoraY] = useState(null);
+    const [partidaFinalizada, setPartidaFinalizada] = useState({ganador: null});
 
     const resetGame = () => {
         setTablePj1(createTable());
         setTablePj2(createTable());
+        setCasillaAtacadaPJ1(null);
+        setCasillaAtacadaPJ2(null);
+        setBarcoComputadora([]);
+        setBarcosPJ1([]);
+        setTurno(true);
+        setGolpeComputadoraX(null);
+        setGolpeComputadoraY(null);
+        setPartidaFinalizada({ganador: null});
+        setAtaquesDeComputadora({0: [], 1: [], 2: [], 3: [], 4: [], 5: [], 6: [], 7:[], 8: [], 9: []})
       }
+
+    useEffect(() => {
+      if (barcoComputadora.length > 0 && barcoComputadora.every((b) => b.estaHundido())) setPartidaFinalizada({ganador: "pj1"});
+      if (barcosPJ1.every((b) => b.estaHundido())) setPartidaFinalizada({ganador: "computadora"});
+    }, [casillaAtacadaPJ2, casillaAtacadaPJ1])
 
     useEffect(() => {
       const atacar = () => {if (!turno) {
@@ -140,6 +156,7 @@ const GameProvider = ({ children }) => {
           if (tablePj1[x][y].ship.estaHundido()) {
             setGolpeComputadoraX(null);
             setGolpeComputadoraY(null);
+            alert(`hundieron tu ${tablePj1[x][y].ship.tipo}`);
           }else {
             setGolpeComputadoraX(x);
             setGolpeComputadoraY(y);
@@ -162,6 +179,7 @@ const GameProvider = ({ children }) => {
         fun(true);
         tablePj2[x][y].ship.atacarBarco();
         setCasillaAtacadaPJ2({x,y,golpe: true});
+        tablePj2[x][y].ship.estaHundido() && alert(tablePj2[x][y].ship.tipo == "lancha"? `hundiste la ${tablePj2[x][y].ship.tipo} enemiga`: `hundiste el ${tablePj2[x][y].ship.tipo} enemigo`);
         siguienteTurno()
       }
     }
@@ -207,7 +225,7 @@ const GameProvider = ({ children }) => {
       setTurno(!turno);
     }
 
-    const data = {turno, siguienteTurno, comenzarComputadora, casillaAtacadaPJ1, casillaAtacadaPJ2,
+    const data = {barcosPJ1, partidaFinalizada, turno, siguienteTurno, comenzarComputadora, casillaAtacadaPJ1, casillaAtacadaPJ2,
        verificarSiHayBarco, eliminarBarcoDeTablero, computadoraAttack, pj1Attack, tablePj1, setTablePj1, tablePj2, setTablePj2, resetGame, putShip };
 
     return (

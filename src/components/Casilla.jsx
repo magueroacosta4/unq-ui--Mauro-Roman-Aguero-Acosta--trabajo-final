@@ -1,4 +1,4 @@
-import "../styles/Home.css";
+import "../styles/Casillas.css";
 
 const Casilla = ({onClick, position, id}) => {
 
