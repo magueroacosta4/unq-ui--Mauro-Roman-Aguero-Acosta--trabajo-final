@@ -1,61 +1,103 @@
-import { useContext } from "react";
-import Casilla from "../components/Casilla";
+import { useContext, useEffect } from "react";
 import { GameContext } from "../hooks/GameContext";
 import "../styles/Home.css";
 import { useState } from "react";
 import { useRef } from "react";
-import createTable from "../hooks/createTable";
 import Barco from "../classes/Barco";
 import Tablero from "../components/Tablero";
 
 const Home = () => {
 
-    const {tablePj1 : tablero, tablePj2: tableroAtaque, resetGame, putShip, pj2Attack} = useContext(GameContext);
+    const {turno, casillaAtacadaPJ1, tablePj1 : tablero, verificarSiHayBarco,
+         eliminarBarcoDeTablero, tablePj2: tableroAtaque, resetGame,
+          putShip, pj1Attack, comenzarComputadora} = useContext(GameContext);
 
     const [barco, setBarco] = useState(null);
     const [etapa, setEtapa] = useState(0);
-    const [barcoColor, setBarcoColor] = useState("purple");
     const [barcoOrientacion, setBarcoOrientacion] = useState(false);
-
+    const [portaaviones] = useState(new Barco("portaaviones", 4, true));
+    const [crucero] = useState(new Barco("crucero", 4, true));
+    const [submarino] = useState(new Barco("submarino", 4, true));
+    const [lancha] = useState(new Barco("lancha", 2, true));
 
     const tableroRef = useRef(null);
     
-    const handleClickCasilla = (p) => {
-        etapa == 0 && putShip(p.i, p.j, barco, ()=>{
-            if(barco.orientacion){
+    useEffect(() => {
+        
+    }, [tablero])
+
+    useEffect(() => {
+        if (casillaAtacadaPJ1) {
+            if (casillaAtacadaPJ1.golpe) {
+                document.getElementById(`t1${casillaAtacadaPJ1.x}${casillaAtacadaPJ1.y}`).className = "casillaAtacadaJugador";
+            }
+            else {
+                document.getElementById(`t1${casillaAtacadaPJ1.x}${casillaAtacadaPJ1.y}`).className = "casillaAtacadaAgua";
+            }
+        }
+    }, [casillaAtacadaPJ1]);
+
+    const colocarBarco = (x, y) => {
+        putShip(tablero,x, y, barco, ()=>{
+        if(barco.orientacion){
+            for (let i = 0; i < barco.size; i++) {
+                document.getElementById(`t1${x}${y-i}`).className= barco.tipo}
+            } else{
                 for (let i = 0; i < barco.size; i++) {
-                    document.getElementById(`t1${p.i}${p.j-i}`).style.backgroundColor = barcoColor}
-                } else{
-                    for (let i = 0; i < barco.size; i++) {
-                        document.getElementById(`t1${p.i-i}${p.j}`).style.backgroundColor = barcoColor;
-                    }
+                    document.getElementById(`t1${x-i}${y}`).className= barco.tipo;
                 }
-        });
-        console.log(barcoOrientacion);
+            }
+        })
+    }
+
+    const cambiaPosicion = (x, y) => {
+        if (!verificarSiHayBarco(tablero,x,y, barco)) {  
+        if(barco.getPosicion()[0].x === barco.getPosicion()[1].x){
+            
+            for (let i = 0; i < barco.size; i++) {
+                document.getElementById(`t1${barco.getPosicion()[i].x}${barco.getPosicion()[i].y}`).className="casilla"} 
+            } else{
+                for (let i = 0; i < barco.size; i++) {
+                    document.getElementById(`t1${barco.getPosicion()[i].x}${barco.getPosicion()[i].y}`).className="casilla";
+                }
+            }
+        eliminarBarcoDeTablero(tablero, barco);
+        colocarBarco(x, y);
+        } else {alert("hay un barco que impide ponerlo ")};
+    }
     
+    const handleClickCasilla = (p) => {
+        etapa === 0 && (!barco.tienePosicion() ? colocarBarco(p.i, p.j) : cambiaPosicion(p.i, p.j))
+
     }
 
     const handleClickAtaque = (p) => {
-        pj2Attack(p.i, p.j, (s)=>{ document.getElementById(`t2${p.i}${p.j}`).style.backgroundColor = s;});
-        console.log(tablero);
+        etapa === 1 && turno && pj1Attack(p.i, p.j, (s)=>{ 
+            
+            if(s) {
+                document.getElementById(`t2${p.i}${p.j}`).className = "casillaAtacadaJugador";
+            }
+            else {
+                document.getElementById(`t2${p.i}${p.j}`).className = "casillaAtacadaAgua";
+            }
+        });
     }
     
-    const agregarBarco = (tipo, cant, color) => {
-            let barco = new Barco(tipo, cant, barcoOrientacion)
-            setBarco(barco);
-            setBarcoColor(color);
-
+    const agregarBarco = (tipo) => {
+            setBarco(tipo);
     }
     
     const finalizarEleccion = () => {
         tableroRef.current.className = "tableroPostEleccion";
+        comenzarComputadora();
         setEtapa(1);
     }
+
 
     return (
         <div >
             <div className="gameContainer">
-                {etapa == 1 && 
+                {etapa === 1 && 
                 <div className="tableroInicio" >
                     <Tablero onClick={(p)=> handleClickAtaque(p)}  tablero={tableroAtaque} idStart="t2" />
                 </div>}
@@ -64,11 +106,18 @@ const Home = () => {
                 </div>
             </div>
             <div>
-                <button onClick={()=>agregarBarco("lancha", 2, "orange")}>change ver</button>
-                <button onClick={()=>agregarBarco("portaaviones", 4, "black")}>change h</button>
+                <button onClick={()=>agregarBarco(lancha)}>lancha</button>
+                <button onClick={()=>agregarBarco(portaaviones)}>portaaviones</button>
+                <button onClick={()=>agregarBarco(crucero)}>crucero</button>
+                <button onClick={()=>agregarBarco(submarino)}>submarino</button>
                 <button onClick={()=>{barco.orientacion = !barco.orientacion; setBarcoOrientacion(!barcoOrientacion)} }>rotar</button>
                 <button onClick={()=>finalizarEleccion()}>finalizar</button>
             </div>
+            {crucero.estaHundido() && portaaviones.estaHundido() && submarino.estaHundido() && lancha.estaHundido() &&
+                <div>
+                <button onClick={()=>resetGame()}>reset</button>
+                </div>}
+                
         </div>
         
     );
