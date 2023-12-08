@@ -25,7 +25,7 @@ const BotonesDeJuego = ({barcoClick, finalizar, barco}) => {
             barcosPJ1.push(submarino);
             barcosPJ1.push(lancha);
         }
-    },[]);
+    },[barcosPJ1]);
 
     const handleFinalizar = (barcos) => {
         if (barcos.every((b) => b.tienePosicion())) finalizar();

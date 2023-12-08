@@ -7,12 +7,13 @@ import Tablero from "../components/Tablero";
 import BotonesDeJuego from "../components/botonesDeJuego";
 
 import ModalFinalizacionJuego from "../components/modalFinalizacionJuego";
+import Historial from "../components/historial";
 
 const Game = () => {
 
     const {turno, casillaAtacadaPJ1, tablePj1 : tablero, verificarSiHayBarco,
          eliminarBarcoDeTablero, tablePj2: tableroAtaque, partidaFinalizada,
-          putShip, pj1Attack, comenzarComputadora} = useContext(GameContext);
+          putShip, pj1Attack, comenzarComputadora, resetGame} = useContext(GameContext);
 
     const [barco, setBarco] = useState(null);
     const [etapa, setEtapa] = useState(0);
@@ -20,6 +21,11 @@ const Game = () => {
     const headerRef = useRef(null);
     const tableroRef = useRef(null);
     const [open, setOpen] = useState(false);
+
+    useEffect(() => {
+        console.log("game mounted");
+        resetGame();
+      }, [])
 
     useEffect(() => {
         partidaFinalizada.ganador && setOpen(true) 
@@ -108,13 +114,20 @@ const Game = () => {
                 <div className="tableroInicio" >
                     <Tablero onClick={(p)=> handleClickAtaque(p)}  tablero={tableroAtaque} idStart="t2" />
                 </div>}
-                <div className="tableroInicio" ref={tableroRef} >
-                    <Tablero onClick={(p)=>handleClickCasilla(p)} tablero={tablero} idStart="t1" />
+                <div >
+                    <div className="tableroInicio" ref={tableroRef} >
+                        <Tablero onClick={(p)=>handleClickCasilla(p)} tablero={tablero} idStart="t1" />
+                    </div>
+                    {etapa === 1 &&
+                        <Historial />
+                        }
                 </div>
                 {etapa === 0 && 
                         <BotonesDeJuego barco={barco} barcoClick={setBarco} finalizar={finalizarEleccion}/>
                     }
+
             </div>
+
             <div >
                 <ModalFinalizacionJuego ganador={partidaFinalizada.ganador == "pj1" ? "¡Ganaste la partida!" : "La computadora gano la partida"} mostrarModal={open}/>
             </div>

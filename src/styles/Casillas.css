@@ -12,7 +12,8 @@
 .casilla:hover {
     
     background-color: white;
-    transition: 0.1s;
+    transition: 0.2s;
+    border-radius: 25%;
 }
 
 .casilla:active {
