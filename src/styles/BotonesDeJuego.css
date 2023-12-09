@@ -1,40 +1,71 @@
-.barco-button {
-    width: 100%;
+.buttons-container {
+    display: flex;
+    flex : wrap;
+    justify-content: center;
+    width: 30%;
+    margin-left: 7rem;
+}
+
+@media (max-width: 960px) {
+    .buttons-container {
+        width: 100%;
+        justify-content: left;
+        flex-direction: row;
+        margin-left: 0rem;
+    }
+}
+
+.buttons {
+    margin-top: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    width: 35%;
+}
+
+@media (max-width: 860px) {
+    .buttons {
+        width: 100%;
+        flex-direction: row;
+        justify-content: center;
+    }
+}
+
+
+.button {
+    width: clamp(4rem, 8vw, 9rem);
+    flex: 1 0 45%;
     border: 1px solid black;
     background-color: #669EFF;
     margin-bottom: 0.5rem;
     border-radius: 10%;
+    margin-right: 0.2rem;
 }
 
-.barco-button:hover {
+
+.button:hover {
     background-color: #00FFFF;
     transition: 0.2s;
     border-radius: 20%;
 }
 
-.rotar-button {
-    width: 34%;
-    margin-bottom: 0.5rem;
-    border: 1px solid black;
-    background-color: #669EFF;
-    border-radius: 10%;
+.button.rotar {
+    height: 4rem;
 }
 
-.rotar-button:hover {
+.button.rotar:hover {
     background-color: #B6FC3C;
     transition: 0.2s;
     border-radius: 20%;
 }
 
-.finalizar-button {
-    width: 100%;
-    height: 2rem;
-    border: 1px solid black;
+.button.finalizar {
+    height: 4rem;
     background-color: #F94118;
     border-radius: 10%;
 }
 
-.finalizar-button:hover {
+.button.finalizar:hover {
     background-color: #3CFC62;
     transition: 0.2s;
     border-radius: 20%;

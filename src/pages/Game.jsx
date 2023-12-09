@@ -5,7 +5,6 @@ import { useState } from "react";
 import { useRef } from "react";
 import Tablero from "../components/Tablero";
 import BotonesDeJuego from "../components/botonesDeJuego";
-
 import ModalFinalizacionJuego from "../components/modalFinalizacionJuego";
 import Historial from "../components/historial";
 
@@ -23,7 +22,6 @@ const Game = () => {
     const [open, setOpen] = useState(false);
 
     useEffect(() => {
-        console.log("game mounted");
         resetGame();
       }, [])
 
@@ -44,10 +42,12 @@ const Game = () => {
     useEffect(() => {
         if (casillaAtacadaPJ1) {
             if (casillaAtacadaPJ1.golpe) {
-                document.getElementById(`t1${casillaAtacadaPJ1.x}${casillaAtacadaPJ1.y}`).className = "casillaAtacadaJugador";
+                const casilla = document.getElementById(`t1${casillaAtacadaPJ1.x}${casillaAtacadaPJ1.y}`).className;
+                document.getElementById(`t1${casillaAtacadaPJ1.x}${casillaAtacadaPJ1.y}`).className = casilla + " casillaAtacadaJugador";
             }
             else {
-                document.getElementById(`t1${casillaAtacadaPJ1.x}${casillaAtacadaPJ1.y}`).className = "casillaAtacadaAgua";
+                const casilla = document.getElementById(`t1${casillaAtacadaPJ1.x}${casillaAtacadaPJ1.y}`).className;
+                document.getElementById(`t1${casillaAtacadaPJ1.x}${casillaAtacadaPJ1.y}`).className = casilla + " casillaAtacadaAgua";
             }
         }
     }, [casillaAtacadaPJ1]);
@@ -56,10 +56,10 @@ const Game = () => {
         putShip(tablero,x, y, barco, ()=>{
         if(barco.orientacion){
             for (let i = 0; i < barco.size; i++) {
-                document.getElementById(`t1${x}${y-i}`).className= barco.tipo}
+                document.getElementById(`t1${x}${y-i}`).className= "casilla " + barco.tipo}
             } else{
                 for (let i = 0; i < barco.size; i++) {
-                    document.getElementById(`t1${x-i}${y}`).className= barco.tipo;
+                    document.getElementById(`t1${x-i}${y}`).className= "casilla " + barco.tipo;
                 }
             }
         })
@@ -88,24 +88,28 @@ const Game = () => {
     const handleClickAtaque = (p) => {
         etapa === 1 && turno && pj1Attack(p.i, p.j, (s)=>{ 
             if(s) {
-                document.getElementById(`t2${p.i}${p.j}`).className = "casillaAtacadaJugador";
+                document.getElementById(`t2${p.i}${p.j}`).className = "casilla " +  "casillaAtacadaJugador";
             }
             else {
-                document.getElementById(`t2${p.i}${p.j}`).className = "casillaAtacadaAgua";
+                document.getElementById(`t2${p.i}${p.j}`).className = "casilla " +  "casillaAtacadaAgua";
             }
         });
     }
     
     const finalizarEleccion = () => {
         tableroRef.current.className = "tableroPostEleccion";
+        for (const e of tableroRef.current.children) {
+            e.className = "fila-postEleccion";
+            for (const c of e.children) {
+                c.className = c.className.replace("casilla", "casilla-postEleccion");
+            }
+        }
         comenzarComputadora();
         setEtapa(1);
     }
 
-
-
     return (
-        <div style={{backgroundColor : "#101B27", display: "flex", flexWrap: "wrap"}}>
+        <div style={{backgroundColor : "#101B27", display: "flex", flexWrap: "wrap", width: "100%"}}>
             <div className="header" ref={headerRef}>
                 <p className="header-text">{etapa == 0 ? "COLOCA TUS BARCOS": turnoTexto}</p>
             </div>
@@ -114,20 +118,18 @@ const Game = () => {
                 <div className="tableroInicio" >
                     <Tablero onClick={(p)=> handleClickAtaque(p)}  tablero={tableroAtaque} idStart="t2" />
                 </div>}
-                <div >
+                <div className="postGame-container">
                     <div className="tableroInicio" ref={tableroRef} >
                         <Tablero onClick={(p)=>handleClickCasilla(p)} tablero={tablero} idStart="t1" />
                     </div>
-                    {etapa === 1 &&
+                {etapa === 1 &&
                         <Historial />
                         }
                 </div>
                 {etapa === 0 && 
                         <BotonesDeJuego barco={barco} barcoClick={setBarco} finalizar={finalizarEleccion}/>
                     }
-
             </div>
-
             <div >
                 <ModalFinalizacionJuego ganador={partidaFinalizada.ganador == "pj1" ? "¡Ganaste la partida!" : "La computadora gano la partida"} mostrarModal={open}/>
             </div>

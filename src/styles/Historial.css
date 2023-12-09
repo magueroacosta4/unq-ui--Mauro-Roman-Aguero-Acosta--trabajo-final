@@ -4,11 +4,18 @@
   flex-direction: column-reverse;
   width: 100%;
   overflow-y: scroll;
-  margin-left: 5rem;
   width: 17.6rem;
   height: 17.6rem;
   margin-top: 2rem;
   background-color: #CCCCCC;
+}
+
+@media (max-width: 1000px) {
+  .historial-container {
+    width: 60%;
+    height: 10rem;
+  }
+
 }
 
 .historial-row {

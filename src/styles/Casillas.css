@@ -1,8 +1,17 @@
 
 
 .casilla {
-    width: 8%;
-    height: 84%;
+    width: clamp(1.5rem, 4vw, 5rem);
+    height: clamp(1.5rem, 4vw, 5rem);
+    margin: 0.4%;
+    border: 1px solid black;
+    background-color: blue;
+    border-radius: 10%;
+}
+
+.casilla-postEleccion {
+    width: clamp(0.5rem, 2vw, 2rem);
+    height: clamp(0.5rem, 2vw, 2rem);
     margin: 0.4%;
     border: 1px solid black;
     background-color: blue;
@@ -20,56 +29,61 @@
     background-color: red;
 }
 
-.portaaviones {
-    width: 8%;
-    height: 84%;
-    margin:  0.4%;
-    border: 1px solid black;
+.casilla.portaaviones {
     background-color: #000033;
     border-radius: 30%;
 }
 
-.lancha {
-    width: 8%;
-    height: 84%;
-    margin:  0.4%;
-    border: 1px solid black;
+.casilla-postEleccion.portaaviones {
+    background-color: #000033;
+    border-radius: 30%;
+}
+
+.casilla-postEleccion.lancha {
     background-color: #FFFF33;
     border-radius: 30%;
 }
 
-.submarino {
-    width: 8%;
-    height: 84%;
-    margin:  0.4%;
-    border: 1px solid black;
+.casilla-postEleccion.submarino {
     background-color: #3333CC ;
     border-radius: 30%;
 }
 
-.crucero {
-    width: 8%;
-    height: 84%;
-    margin:  0.4%;
-    border: 1px solid black;
+.casilla-postEleccion.crucero {
     background-color: #339900;
     border-radius: 30%;
 }
 
-.casillaAtacadaJugador {
-    width: 8%;
-    height: 84%;
-    margin: 0.4%;
-    border: 1px solid black;
+
+.casilla.lancha {
+    background-color: #FFFF33;
+    border-radius: 30%;
+}
+
+.casilla.submarino {
+    background-color: #3333CC ;
+    border-radius: 30%;
+}
+
+.casilla.crucero {
+    background-color: #339900;
+    border-radius: 30%;
+}
+
+.casilla.casillaAtacadaJugador {
     background-color: #FF0000;
     border-radius: 50%;
 }
 
-.casillaAtacadaAgua {
-    width: 8%;
-    height: 84%;
-    margin: 0.4%;
-    border: 1px solid black;
+.casilla.casillaAtacadaAgua {
     background-color: #00FFFF;
-    border-radius: 30%;
+}
+
+.casilla-postEleccion.casillaAtacadaJugador {
+    background-color: #FF0000;
+    border-radius: 50%;
+}
+
+.casilla-postEleccion.casillaAtacadaAgua {
+    background-color: #00FFFF;
 }

@@ -24,6 +24,7 @@ const BotonesDeJuego = ({barcoClick, finalizar, barco}) => {
             barcosPJ1.push(crucero);
             barcosPJ1.push(submarino);
             barcosPJ1.push(lancha);
+            barcoClick(portaaviones);
         }
     },[barcosPJ1]);
 
@@ -34,14 +35,18 @@ const BotonesDeJuego = ({barcoClick, finalizar, barco}) => {
 
     return (
         <>
-            <div style={{display: "flex", flexWrap: "wrap"}}>
-                <div style={{marginLeft:"5rem", marginTop: "2rem", display: "flex", flexWrap: "wrap", flexDirection: "column", width: "20%"}}>
-                    <img style={{marginRight: "3.4rem"}} src={rotateSVG} className="rotar-button" onClick={()=>{barco.orientacion = !barco.orientacion}}/>    
-                    <img src={submarinoSVG} className="barco-button" onClick={()=>barcoClick(submarino)}/>
-                    <img src={cruceroPNG} className="barco-button" onClick={()=>barcoClick(crucero)}/>
-                    <img src={lanchaSVG} className="barco-button" onClick={()=>barcoClick(lancha)}/>
-                    <img src={portaavionesSVG} className="barco-button" onClick={()=>barcoClick(portaaviones)}/>
-                    <img src={finalizarSVG} className="finalizar-button"  onClick={()=>handleFinalizar([portaaviones, crucero, submarino, lancha])} />    
+            <div className="buttons-container">
+                <div className="buttons">
+                    <div><img style={{marginRight: "3.4rem"}} src={rotateSVG} className="button rotar" onClick={()=>{barco.orientacion = !barco.orientacion}}/> </div>   
+                    <div>
+                    <img src={submarinoSVG} className="button" onClick={()=>barcoClick(submarino)}/>
+                    <img src={cruceroPNG} className="button" onClick={()=>barcoClick(crucero)}/>
+                    </div>
+                    <div>
+                    <img src={lanchaSVG} className="button" onClick={()=>barcoClick(lancha)}/>
+                    <img src={portaavionesSVG} className="button" onClick={()=>barcoClick(portaaviones)}/>
+                    </div>
+                    <div><img src={finalizarSVG} className="button finalizar"  onClick={()=>handleFinalizar([portaaviones, crucero, submarino, lancha])} />   </div> 
                 </div>
             </div>
         </>
