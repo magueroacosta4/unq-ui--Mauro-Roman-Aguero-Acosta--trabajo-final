@@ -131,7 +131,7 @@ const Game = () => {
                     }
             </div>
             <div >
-                <ModalFinalizacionJuego ganador={partidaFinalizada.ganador == "pj1" ? "¡Ganaste la partida!" : "La computadora gano la partida"} mostrarModal={open}/>
+                <ModalFinalizacionJuego ganador={partidaFinalizada.ganador} mostrarModal={open}/>
             </div>
         </div>
         

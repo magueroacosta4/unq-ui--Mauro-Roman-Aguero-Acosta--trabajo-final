@@ -3,10 +3,11 @@
     flex : wrap;
     justify-content: center;
     width: 30%;
-    margin-left: 7rem;
+    margin-left: 14rem;
+    margin-top: 0.2rem;
 }
 
-@media (max-width: 960px) {
+@media (max-width: 860px) {
     .buttons-container {
         width: 100%;
         justify-content: left;
