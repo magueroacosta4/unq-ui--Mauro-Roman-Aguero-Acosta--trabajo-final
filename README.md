@@ -5,11 +5,11 @@ UNQ
 
 ## Instrucciones de Instalación y Ejecución
 
-    Requisitos
+###  Requisitos
     * Tener instalado git
     * Tener instalado NPM y Node (minimo 10.1.0)
 
-    Pasos de instalacion
+###  Pasos de instalacion
         - Ejecutar una terminal y navegar hacia la carpeta donde se instalara
         - Clonar el repositorio 
             ```bash
