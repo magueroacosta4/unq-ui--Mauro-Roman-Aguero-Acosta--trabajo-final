@@ -4,7 +4,7 @@ import lanchaSVG from "../images/66.png";
 import portaavionesSVG from "../images/warship-icon.svg";
 import rotateSVG from "../images/iconmonstr-refresh-1.svg";
 import finalizarSVG from "../images/right-arrow-svgrepo-com.svg";
-import { useContext, useEffect, useState } from "react";
+import { useContext} from "react";
 import GameContext from "../hooks/GameContext";
 import "../styles/BotonesDeJuego.css"
 
@@ -21,16 +21,16 @@ const BotonesDeJuego = ({barcoClick, finalizar, barco}) => {
         <>
             <div className="buttons-container">
                 <div className="buttons">
-                    <div><img style={{marginRight: "3.4rem"}} src={rotateSVG} className="button rotar" onClick={()=>{barco.orientacion = !barco.orientacion}}/> </div>   
+                    <div><img prop="" style={{marginRight: "3.4rem"}} src={rotateSVG} className="button rotar" onClick={()=>{barco.orientacion = !barco.orientacion}}/> </div>   
                     <div>
-                    <img src={submarinoSVG} className="button" onClick={()=>barcoClick(barcosPJ1[2])}/>
-                    <img src={cruceroPNG} className="button" onClick={()=>barcoClick(barcosPJ1[1])}/>
+                    <img prop="" src={submarinoSVG} className="button" onClick={()=>barcoClick(barcosPJ1[2])}/>
+                    <img prop="" src={cruceroPNG} className="button" onClick={()=>barcoClick(barcosPJ1[1])}/>
                     </div>
                     <div>
-                    <img src={lanchaSVG} className="button" onClick={()=>barcoClick(barcosPJ1[3])}/>
-                    <img src={portaavionesSVG} className="button" onClick={()=>barcoClick(barcosPJ1[0])}/>
+                    <img prop="" src={lanchaSVG} className="button" onClick={()=>barcoClick(barcosPJ1[3])}/>
+                    <img prop="" src={portaavionesSVG} className="button" onClick={()=>barcoClick(barcosPJ1[0])}/>
                     </div>
-                    <div><img src={finalizarSVG} className="button finalizar"  onClick={()=>handleFinalizar()} />   </div> 
+                    <div><img prop="" src={finalizarSVG} className="button finalizar"  onClick={()=>handleFinalizar()} />   </div> 
                 </div>
             </div>
         </>

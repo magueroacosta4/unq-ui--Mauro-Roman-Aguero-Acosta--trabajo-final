@@ -88,10 +88,10 @@ const Game = () => {
     const handleClickAtaque = (p) => {
         etapa === 1 && turno && pj1Attack(p.i, p.j, (s)=>{ 
             if(s) {
-                document.getElementById(`t2${p.i}${p.j}`).className = "casilla " +  "casillaAtacadaJugador";
+                document.getElementById(`t2${p.i}${p.j}`).className = "casilla casillaAtacadaJugador";
             }
             else {
-                document.getElementById(`t2${p.i}${p.j}`).className = "casilla " +  "casillaAtacadaAgua";
+                document.getElementById(`t2${p.i}${p.j}`).className = "casilla casillaAtacadaAgua";
             }
         });
     }

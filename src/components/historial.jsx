@@ -4,7 +4,7 @@ import "../styles/Historial.css";
 import HistorialRow from "./HistorialRow";
 
 
-const Historial = ({}) => {
+const Historial = () => {
 
     const {casillaAtacadaPJ1, casillaAtacadaPJ2, barcoHundido} = useContext(GameContext);
     const [historial, setHistorial] = useState([]);
