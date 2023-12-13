@@ -11,19 +11,19 @@ UNQ
 ## Pasos de instalacion
 ### Ejecutar una terminal y navegar hacia la carpeta donde se instalara
 ### Clonar el repositorio 
-            ```bash
+            bash
             git clone https://github.com/magueroacosta4/unq-ui--Mauro-Roman-Aguero-Acosta--trabajo-final.git
-            ```
+            
 ### Ir al directorio 
-            ```bash
+            bash
             cd unq-ui--Mauro-Roman-Aguero-Acosta--trabajo-final
-            ```
+            
 
 ### Instalar dependencias
-            ```bash
+            bash
             npm install
-            ```
+            
 ### Ejecuta la aplicación
-            ```bash
+            bash
             npm start
-            ```
+            
