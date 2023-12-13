@@ -24,6 +24,6 @@
             
 ### Ejecuta la aplicación
             
-    npm start
+    npm start || npm run start
 
 ### Para ver la aplicación dirigase a la siguiente url: http://localhost:3000/
