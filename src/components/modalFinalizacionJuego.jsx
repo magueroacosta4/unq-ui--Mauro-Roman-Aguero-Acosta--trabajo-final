@@ -27,7 +27,7 @@ const ModalFinalizacionJuego = ({ mostrarModal, ganador }) => {
               
             </Modal.Header>
             <Modal.Body style={{display: "flex", flex: "wrap", flexDirection: "column"}}>
-              {ganador == "pj1" ? "¡Ganaste la partida!" : "computadora"? "La computadora gano la partida": ""}
+              {ganador == "pj1" ? "¡Ganaste la partida!" : ganador == "computadora"? "La computadora gano la partida": "¡Ganaste la partida!"}
               <button style={{marginTop: "1rem"}} className="btn btn-primary" onClick={()=> handleFinalizar()}>Volver al inicio</button>
             </Modal.Body>
 

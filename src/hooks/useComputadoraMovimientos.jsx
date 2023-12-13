@@ -1,9 +1,9 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import Barco from "../classes/Barco";
-import useMovimientosBarcos from "./useMovimientosBarcos";
+import movimientosBarcos from "../helper/movimientosBarcos";
 
 const useComputadoraMovimientos = (tablePj2, tablePj1, setCasillaAtacadaPJ1, setBarcoHundido) => {
-    const {verificarSiHayBarco} = useMovimientosBarcos();
+    const {verificarSiHayBarco} = movimientosBarcos();
     const [ataquesDeComputadora, setAtaquesDeComputadora] = useState({0: [], 1: [], 2: [], 3: [], 4: [], 5: [], 6: [], 7:[], 8: [], 9: []})
     const [golpeComputadoraX, setGolpeComputadoraX] = useState(null);
     const [golpeComputadoraY, setGolpeComputadoraY] = useState(null);

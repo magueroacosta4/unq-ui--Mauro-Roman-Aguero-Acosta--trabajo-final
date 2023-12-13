@@ -1,5 +1,5 @@
 
-const useMovimientosBarcos = () => {
+const movimientosBarcos = () => {
     
     const verificarSiHayBarco = (table, x, y, ship) => {
         var hayBarco = false;
@@ -59,4 +59,4 @@ const useMovimientosBarcos = () => {
     return {verificarSiHayBarco, putShip, eliminarBarcoDeTablero}
 }
 
-export default useMovimientosBarcos
+export default movimientosBarcos

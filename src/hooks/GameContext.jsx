@@ -1,7 +1,8 @@
 import { createContext, useEffect, useState } from "react";
-import createTable from "./createTable";
+import createTable from "../helper/createTable";
 import useComputadoraMovimientos from "./useComputadoraMovimientos";
-import useMovimientosBarcos from "./useMovimientosBarcos";
+import movimientosBarcos from "../helper/movimientosBarcos";
+import usePJ1Movimientos from "./usePJ1Movimientos";
 
 
 export const GameContext = createContext(null);
@@ -14,24 +15,23 @@ const GameProvider = ({ children }) => {
     const [tablePj2, setTablePj2] = useState(createTable());
     const [casillaAtacadaPJ1, setCasillaAtacadaPJ1] = useState(null);
     const [casillaAtacadaPJ2, setCasillaAtacadaPJ2] = useState(null);
-    const [barcosPJ1, setBarcosPJ1] = useState([]);
     const [turno, setTurno] = useState(true);
     const [partidaFinalizada, setPartidaFinalizada] = useState({ganador: null});
     const [barcoHundido, setBarcoHundido] = useState(null);
-    const {verificarSiHayBarco, putShip, eliminarBarcoDeTablero} = useMovimientosBarcos();
+    const {verificarSiHayBarco, putShip, eliminarBarcoDeTablero} = movimientosBarcos();
+    const {pj1Attack, reiniciarPj1, barcosPJ1} = usePJ1Movimientos(tablePj2, setCasillaAtacadaPJ2, setBarcoHundido, ()=>setTurno(!turno));
     const {comenzarComputadora, computadoraAttack,
-       barcoComputadora, setBarcoComputadora, reiniciarComputadora} = useComputadoraMovimientos(tablePj2, tablePj1, setCasillaAtacadaPJ1, setBarcoHundido);
+       barcoComputadora, reiniciarComputadora} = useComputadoraMovimientos(tablePj2, tablePj1, setCasillaAtacadaPJ1, setBarcoHundido);
    
 
     const resetGame = () => {
+        reiniciarComputadora();
+        reiniciarPj1();
         setTablePj1(createTable());
         setTablePj2(createTable());
         setCasillaAtacadaPJ1(null);
         setCasillaAtacadaPJ2(null);
-        setBarcoComputadora([]);
-        setBarcosPJ1([]);
         setTurno(true);
-        reiniciarComputadora();
         setPartidaFinalizada({ganador: null});
         setBarcoHundido(null);
       }
@@ -52,30 +52,6 @@ const GameProvider = ({ children }) => {
       return () => clearTimeout(timer)
 
     }, [turno])
-
-    const pj1Attack = (x, y, fun) => {
-      if(tablePj2[x][y] == null){
-        tablePj2[x][y] = "marcado"
-          fun(false);
-          setCasillaAtacadaPJ2({x,y,golpe: false});
-          siguienteTurno()
-      }else if(tablePj2[x][y] == "marcado"){
-        alert("ya atacaste ahí");}
-      else if(tablePj2[x][y].atacado == 1){
-        alert("ya atacaste ahí");}
-      else {
-        tablePj2[x][y].atacado = 1;
-        fun(true);
-        tablePj2[x][y].ship.atacarBarco();
-        setCasillaAtacadaPJ2({x,y,golpe: true});
-        if (tablePj2[x][y].ship.estaHundido()) {
-          alert(tablePj2[x][y].ship.tipo == "lancha"? `hundiste la ${tablePj2[x][y].ship.tipo} enemiga`: `hundiste el ${tablePj2[x][y].ship.tipo} enemigo`);
-          setBarcoHundido({tipo : tablePj2[x][y].ship.tipo, jugador: "pj1"});
-
-        }
-        siguienteTurno()
-      }
-    }
 
     const siguienteTurno = () => {
       setTurno(!turno);
