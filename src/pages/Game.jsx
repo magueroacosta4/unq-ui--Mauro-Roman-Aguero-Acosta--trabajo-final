@@ -109,7 +109,7 @@ const Game = () => {
     }
 
     return (
-        <div style={{backgroundColor : "#101B27", display: "flex", flexWrap: "wrap", width: "100%"}}>
+        <div style={{justifyContent: "center", backgroundColor : "#101B27", display: "flex", flexWrap: "wrap", width: "100%"}}>
             <div className="header" ref={headerRef}>
                 <p className="header-text">{etapa == 0 ? "COLOCA TUS BARCOS": turnoTexto}</p>
             </div>
