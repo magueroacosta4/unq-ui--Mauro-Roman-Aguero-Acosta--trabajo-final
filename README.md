@@ -24,6 +24,6 @@ npm install
             
 ### Ejecuta la aplicación
             
-npm start
+    npm start
 
 ### Para ver la aplicación dirigase a la siguiente url: http://localhost:3000/
