@@ -11,16 +11,16 @@
 ### Ejecutar una terminal y navegar hacia la carpeta donde se instalará
 ### Clonar el repositorio 
             
-git clone https://github.com/magueroacosta4/unq-ui--Mauro-Roman-Aguero-Acosta--trabajo-final.git
+    git clone https://github.com/magueroacosta4/unq-ui--Mauro-Roman-Aguero-Acosta--trabajo-final.git
             
 ### Ir al directorio 
         
-cd unq-ui--Mauro-Roman-Aguero-Acosta--trabajo-final
+    cd unq-ui--Mauro-Roman-Aguero-Acosta--trabajo-final
             
 
 ### Instalar dependencias
             
-npm install
+    npm install
             
 ### Ejecuta la aplicación
             
